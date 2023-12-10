@@ -28,10 +28,11 @@ public class test {
         Customer customer1 = new Customer("Vu Quang Huy");
         customer1.buyTicketForHour(3);
         System.out.println(customer1.getCurrentTicketInfor());
-        customer1.rentBicycle(customer1, station1 );
-        Customer customer2 = new Customer("Vu quang huy");
-        customer2.rentBicycle(customer2, station1);
-        customer1.returnBicycle(customer1,station1);
+        customer1.rentBicycle(station1 );
+//        Customer customer2 = new Customer("Vu quang huy");
+//        customer2.rentBicycle(customer2, station1);
+        customer1.returnBicycle(station1);
+
 
     }
 }

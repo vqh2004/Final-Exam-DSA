@@ -7,8 +7,8 @@ public class Ticket {
     private LocalTime purchaseTime; // time when customer buy ticket
     private  LocalTime validTime; // time validity
     private int price; // Ticket price
-    private final int TICKET_FOR_HOUR = 20000;
-    private final int TICKET_FOR_DAILY = 150000;
+    protected final int TICKET_FOR_HOUR = 20000;
+    protected final int TICKET_FOR_DAILY = 150000;
 
     public Ticket createTicketForHour(int time) {
         Ticket ticket = new Ticket();
