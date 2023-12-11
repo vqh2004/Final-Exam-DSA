@@ -2,6 +2,7 @@ package BICYCLE_MANAGEMENT;
 
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -49,9 +50,11 @@ public class Customer {
             // update bicycle time traveled
             Duration duration = Duration.between(bicycleRentalTime, currentTicket.getValidTime());
             long updateTime = duration.getSeconds();
-            System.out.println("Renting success");
-            System.out.println("Time available: " + currentTicket.getValidTime());
-            System.out.println("Rented bike with running time: " + this.bicycleRented.getTimeTraveled()); // print time traveled of bicycle
+            double traveledHours = updateTime * 1.0 / 60 / 60;
+            this.bicycleRented.updateTraveledTime(traveledHours);
+            System.out.println("RENTING SUCCESS!!!!");
+//            System.out.println("Time available: " + currentTicket.getValidTime());
+//            System.out.println("Rented bike with running time: " + this.bicycleRented.getTimeTraveled()); // print time traveled of bicycle
         }
     }
 
@@ -96,8 +99,8 @@ public class Customer {
 
 
     // to extend ticket validity
-    public void renewalTicket(int time) {
-        renewalTicket(time);
+    public void renewalTicket(int extraHours) {
+        this.currentTicket.getValidTime().plusHours(extraHours);
     }
 
     public String getName() {
@@ -118,26 +121,15 @@ public class Customer {
                 ticketType = "Hourly Ticket";
             }
 
-            return "ID: " + this.idName +
+            return "#########TICKET INFORMATION#########\n" +
+                    "ID: " + this.idName +
                     "\nName: " + this.name +
                     "\nTicket Type: " + ticketType +
-                    "\nTicket Price: "+ new FormatMoney(ticketPrice).format()+
+                    "\nTicket Price: " + new FormatMoney(ticketPrice).format() +
                     "\nPurchase Time: " + this.currentTicket.getPurchaseTime() +
-                    "\nValid Until: " + this.currentTicket.getValidTime();
+                    "\nValid Until: " + this.currentTicket.getValidTime() + "\n" +
+                    "#####################################";
         }
         return "No ticket purchased yet.";
     }
-
-
-//    public static void main(String[] args) {
-//
-//        Customer customer = new Customer("Vu quang huy");
-//        Customer customer1 = new Customer("vu wusn huy");
-//        System.out.println(customer.getIdName());
-//        System.out.println(customer1.getIdName());
-//        customer.buyTicketForHour(2);
-//        customer1.buyTicketForDaily();
-//        System.out.println(customer.getCurrentTicketInfor());
-//        System.out.println(customer1.getCurrentTicketInfor());
-//    }
 }

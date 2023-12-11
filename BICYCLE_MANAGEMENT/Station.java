@@ -9,6 +9,11 @@ public class Station {
         this.name = name;
     }
 
+    public Station(BicyclePriorityManager station, String name) {
+        this.station = station;
+        this.name = name;
+    }
+
     public void insertBicycle(Bicycle bicycle) {
         station.insert(bicycle);
     }
@@ -21,4 +26,7 @@ public class Station {
         return station.isEmpty();
     }
 
+    public String getName() {
+        return name;
+    }
 }

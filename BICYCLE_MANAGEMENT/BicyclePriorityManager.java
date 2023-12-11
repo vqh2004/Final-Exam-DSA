@@ -14,10 +14,10 @@ public class BicyclePriorityManager {
 
     // function to insert a bicycle from customer
     public void insert(Bicycle bicycle) {
-        checkToInsert();
-        checkExpired(bicycle);
-        int insertionIndex = binarySearch((int) bicycle.getTimeTraveled());
-        shiftAndInsert(insertionIndex, bicycle);
+        if(checkToInsert() && checkExpired(bicycle)) {
+            int insertionIndex = binarySearch((int) bicycle.getTimeTraveled());
+            shiftAndInsert(insertionIndex, bicycle);
+        }
     }
 
     // function to export bicycle when customer rent
@@ -28,20 +28,22 @@ public class BicyclePriorityManager {
             n--;
             return bicycleExport;
         } else {
-            throw new RuntimeException("No bicycle available for export.");
+            return null;
         }
     }
 
     // function to check the expired bicycle
-    public void checkExpired(Bicycle bicycle) throws RuntimeException{
+    public boolean checkExpired(Bicycle bicycle) throws RuntimeException{
         if (bicycle.getTimeTraveled() > bicycle.getDurableTime()) {
-            System.out.println("Expired bicycle: " + bicycle.getId());
+            return false;
         }
+        return true;
     }
-    public void checkToInsert() throws ArrayIndexOutOfBoundsException {
-        if (n == defaultSize) {
-            throw new ArrayIndexOutOfBoundsException("Priority queue is full");
+    public boolean checkToInsert(){
+        if (n >= defaultSize) {
+            return false;
         }
+        return true;
     }
 
     public void checkToRemove() throws ArrayIndexOutOfBoundsException {
@@ -79,6 +81,17 @@ public class BicyclePriorityManager {
     private void shiftToLeft() {
         for (int i = 1; i < n; i++) {
             station[i - 1] = station[i];
+        }
+    }
+    int size(){
+        return n;
+    }
+
+    Bicycle getBike(int i){
+        if(i>=0 && i<n){
+            return station[i];
+        } else{
+            return null;
         }
     }
 }
