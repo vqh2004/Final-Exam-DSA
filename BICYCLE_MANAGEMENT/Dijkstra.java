@@ -32,6 +32,37 @@ public class Dijkstra {
         }
     }
 
+    Vertex findTheNearestStation(Vertex vertex) {
+        vertex.setDistance(0);
+        vertex.setVisited(true);
+
+        PriorityQueue<Vertex> vertices = new PriorityQueue<>();
+        vertices.add(vertex);
+
+        while (!vertices.isEmpty()) {
+            Vertex top = vertices.poll();
+            for (Edge e : top.getAdjEdge()) {
+                Vertex endV = e.getEndPoint();
+                if (!endV.isVisited()) {
+                    double newDist = top.getDistance() + e.getDist();
+                    if (newDist < endV.getDistance()) {
+//                        vertices.remove(endV);
+                        endV.setDistance(newDist);
+                        endV.setPrevious(top);
+                        vertices.add(endV);
+                    }
+                }
+            }
+            if(!vertices.isEmpty() && vertices.peek().isRealStation()){
+                return vertices.peek();
+            }
+            top.setVisited(true);
+        }
+        return null;
+    }
+
+
+
     public List<Vertex> getTheShortestPath(Vertex vertex) {
         List<Vertex> vertexList = new ArrayList<>();
         Vertex tmp = vertex;
