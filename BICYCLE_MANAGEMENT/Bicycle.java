@@ -36,7 +36,7 @@ public class Bicycle {
 
 
     public double updateTraveledTime(double time) {
-        return timeTraveled += time ;
+        return timeTraveled+=time;
     }
 
     @Override

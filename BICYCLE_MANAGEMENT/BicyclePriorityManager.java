@@ -34,6 +34,10 @@ public class BicyclePriorityManager {
 
     // function to check the expired bicycle
     public boolean checkExpired(Bicycle bicycle) throws RuntimeException{
+        if(bicycle==null){
+            System.out.println("Chua co xe dap!!!");
+            return false;
+        }
         if (bicycle.getTimeTraveled() > bicycle.getDurableTime()) {
             return false;
         }

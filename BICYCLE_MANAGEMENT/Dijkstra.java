@@ -35,7 +35,7 @@ public class Dijkstra {
     Vertex findTheNearestStation(Vertex vertex) {
         vertex.setDistance(0);
 
-        SortedPriorityQueue vertices = new SortedPriorityQueue();
+        HeapPriorityQueue vertices = new HeapPriorityQueue();
         vertices.insert(vertex);
 
         while (!vertices.isEmpty()) {
@@ -62,7 +62,7 @@ public class Dijkstra {
         return null;
     }
 
-    public void printPriority(SortedPriorityQueue vertices){
+    public void printPriority(HeapPriorityQueue vertices){
         vertices.print();
     }
 

@@ -19,6 +19,15 @@ public class Ticket {
         return ticket;
     }
 
+    public boolean isHourTicket(){
+//        System.out.println("####"+this.getClass().getName().equals("createTicketForHour"));
+        if(this.getClass().getName().equals("createTicketForHour")){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     public Ticket createTicketForDaily() {
         Ticket ticket = new Ticket();
         ticket.purchaseTime = LocalTime.now().truncatedTo(ChronoUnit.MINUTES);
